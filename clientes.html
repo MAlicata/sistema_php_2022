@@ -467,6 +467,37 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+    <script>
+        //es para que se ejecute cuando termine de cargar 
+        $(document).ready(function(){
+            consultarClientes();
+            //agregarClienteTabla(1, "Matias", "Alicata", "matias@gmail.com", 5412441, "probando jquery");                     
+        });
+
+        function consultarClientes(){
+            fetch('http://localhost/sistema_php_2022/api/consultar.php', {
+                method: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(respuesta => respuesta.json())
+            .then(clientes => {
+                console.log(clientes);
+            })
+        }
+
+        function agregarClienteTabla(id, nombre, apellido, email, telefono, detalle){
+            $('#dataTable tbody').append(`<tr>
+                                            <td>${id}</td>
+                                            <td>${apellido}, ${nombre}</td>
+                                            <td>${email}</td>
+                                            <td>${telefono}</td>
+                                            <td>${detalle}</td>
+                                        </tr>`);  
+        }
+    </script>
 
 </body>
 
