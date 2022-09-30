@@ -391,13 +391,6 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Matías Alicata</td>
-                                            <td>matias@gmail.com</td>
-                                            <td>123456789</td>
-                                            <td>test</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -484,17 +477,23 @@
             })
             .then(respuesta => respuesta.json())
             .then(clientes => {
-                console.log(clientes);
+                agregarVariosClientesTabla(clientes);
             })
         }
 
-        function agregarClienteTabla(id, nombre, apellido, email, telefono, detalle){
+        function agregarVariosClientesTabla(clientes){
+            for(let cliente of clientes){
+                agregarClienteTabla(cliente);
+            }
+        }
+
+        function agregarClienteTabla(cliente){
             $('#dataTable tbody').append(`<tr>
-                                            <td>${id}</td>
-                                            <td>${apellido}, ${nombre}</td>
-                                            <td>${email}</td>
-                                            <td>${telefono}</td>
-                                            <td>${detalle}</td>
+                                            <td>${cliente.id}</td>
+                                            <td>${cliente.apellido}, ${cliente.nombre}</td>
+                                            <td>${cliente.email}</td>
+                                            <td>${cliente.telefono}</td>
+                                            <td>${cliente.detalle}</td>
                                         </tr>`);  
         }
     </script>
